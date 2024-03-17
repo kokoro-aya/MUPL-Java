@@ -3,8 +3,8 @@ package moe.irony.mupl.data;
 import moe.irony.mupl.Visitor;
 
 public class APair implements Expr {
-    Expr e1;
-    Expr e2;
+    public Expr e1;
+    public Expr e2;
 
     public APair(Expr e1, Expr e2) {
         this.e1 = e1;

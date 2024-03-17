@@ -3,9 +3,9 @@ package moe.irony.mupl.data;
 import moe.irony.mupl.Visitor;
 
 public class MLet implements Expr {
-    String var;
-    Expr e;
-    Expr body;
+    public String var;
+    public Expr e;
+    public Expr body;
 
     public MLet(String var, Expr e, Expr body) {
         this.var = var;

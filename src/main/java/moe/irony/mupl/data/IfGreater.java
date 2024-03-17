@@ -3,10 +3,10 @@ package moe.irony.mupl.data;
 import moe.irony.mupl.Visitor;
 
 public class IfGreater implements Expr {
-    Expr e1;
-    Expr e2;
-    Expr e3;
-    Expr e4;
+    public Expr e1;
+    public Expr e2;
+    public Expr e3;
+    public Expr e4;
 
     public IfGreater(Expr e1, Expr e2, Expr e3, Expr e4) {
         this.e1 = e1;

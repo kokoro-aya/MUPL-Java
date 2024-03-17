@@ -3,9 +3,9 @@ package moe.irony.mupl.data;
 import moe.irony.mupl.Visitor;
 
 public class Fun implements Expr {
-    String nameopt;
-    String formal;
-    Expr body;
+    public String nameopt;
+    public String formal;
+    public Expr body;
 
     public Fun(String nameopt, String formal, Expr body) {
         this.nameopt = nameopt;

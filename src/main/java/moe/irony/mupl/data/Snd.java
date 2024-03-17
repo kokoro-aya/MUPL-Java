@@ -3,7 +3,7 @@ package moe.irony.mupl.data;
 import moe.irony.mupl.Visitor;
 
 public class Snd implements Expr {
-    Expr e;
+    public Expr e;
 
     public Snd(Expr e) {
         this.e = e;

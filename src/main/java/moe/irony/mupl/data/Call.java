@@ -3,8 +3,8 @@ package moe.irony.mupl.data;
 import moe.irony.mupl.Visitor;
 
 public class Call implements Expr {
-    Expr funexp;
-    Expr actual;
+    public Expr funexp;
+    public Expr actual;
 
     public Call(Expr funexp, Expr actual) {
         this.funexp = funexp;

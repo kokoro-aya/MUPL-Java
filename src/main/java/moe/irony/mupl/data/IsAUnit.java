@@ -3,7 +3,7 @@ package moe.irony.mupl.data;
 import moe.irony.mupl.Visitor;
 
 public class IsAUnit implements Expr {
-    Expr e;
+    public Expr e;
 
     public IsAUnit(Expr e) {
         this.e = e;
