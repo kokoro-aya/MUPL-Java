@@ -15,7 +15,8 @@ public class Closure implements Expr {
 
     @Override
     public Expr accept(Visitor v) {
-        var vFun = fun.accept(v);
-        return new Closure(env, fun);
+        // Some pitfall here since the `accept` function dispatch this object to `visitClosure`
+        // Maybe better refactor the evaluations into Visitor instead of making them in Exprs?
+        return v.visitClosure(this);
     }
 }

@@ -74,7 +74,25 @@ public class Visitor {
     }
 
     public Expr visitCall(Call c) {
-        return null;
+        var vFn = c.funexp;
+        var vAct = c.actual;
+        if (vFn instanceof Closure clos) {
+            var closFun = clos.fun;
+            var closEnv = clos.env;
+            var funName = closFun.nameopt;
+            var funArg = closFun.formal;
+
+            var newEnv = new HashMap<String, Expr>();
+            if (!funName.equals("#f")) {
+                newEnv.put(funName, vFn);
+            }
+            newEnv.put(funArg, vAct);
+            newEnv.putAll(closEnv);
+
+            return closFun.body.accept(new Visitor(newEnv));
+        } else {
+            throw new IllegalStateException("MUPL call operation must have first subexpression evaluated to closure");
+        }
     }
 
     public Expr visitAPair(APair a) {

@@ -15,7 +15,8 @@ public class Fun implements Expr {
 
     @Override
     public Expr accept(Visitor v) {
-        var vBody = body.accept(v);
-        return v.visitFun(new Fun(nameopt, formal, vBody));
+        // Some pitfall here since the `accept` function dispatch this object to `visitFun`
+        // Maybe better refactor the evaluations into Visitor instead of making them in Exprs?
+        return v.visitFun(this);
     }
 }
