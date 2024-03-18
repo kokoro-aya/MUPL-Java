@@ -60,15 +60,20 @@ public class Visitor {
         }
     }
 
+    public Expr visitMLet(MLet l) {
+        var label = l.var;
+        var ex = l.e;
+        var newEnv = new HashMap<>(this.env);
+        newEnv.put(label, ex);
+        // Tricky part of MLet to evaluated an augmented environment
+        return l.body.accept(new Visitor(newEnv));
+    }
+
     public Expr visitFun(Fun f) {
-        return null;
+        return new Closure(this.env, f);
     }
 
     public Expr visitCall(Call c) {
-        return null;
-    }
-
-    public Expr visitMLet(MLet l) {
         return null;
     }
 
@@ -98,6 +103,10 @@ public class Visitor {
 
     public Expr visitAUnit(AUnit a) {
         return a;
+    }
+
+    public Expr visitClosure(Closure c) {
+        return c;
     }
 
     public Expr visitIsAUnit(IsAUnit i) {

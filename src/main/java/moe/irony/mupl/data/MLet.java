@@ -16,7 +16,8 @@ public class MLet implements Expr {
     @Override
     public Expr accept(Visitor v) {
         var vE = e.accept(v);
-        var vBody = body.accept(v);
-        return v.visitMLet(new MLet(var, vE, vBody));
+        // The implementation of MLet is a bit tricky, we didn't evaluate the body here but kept it unevaluated
+        // so it will be called in Visitor with an augmented environment
+        return v.visitMLet(new MLet(var, vE, body));
     }
 }

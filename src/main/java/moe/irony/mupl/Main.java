@@ -8,7 +8,9 @@ public class Main {
 
 //        var expr = new IsAUnit(new Int(39));
 //        var expr = new IfGreater(new Int(12), new Int(27), new Int(12), new Int(33));
-        var expr = new Snd(new APair(new Int(33), new Int(20)));
+//        var expr = new Snd(new APair(new Int(33), new Int(20)));
+
+        var expr = new MLet("x", new Int(1), new Add(new Int(5), new Var("x")));
 
         var visitor = new Visitor();
         var res = expr.accept(visitor);
