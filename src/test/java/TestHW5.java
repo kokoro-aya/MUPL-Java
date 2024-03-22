@@ -119,7 +119,25 @@ public class TestHW5 {
 
     @Test
     public void testCombined() {
-        fail();
+        var expr = new Call(new Call(Lib.muplMapAddN(), new Int(7)),
+                        Lib.javaListToMuplList(
+                                List.of(new Int(3), new Int(4), new Int(9))));
+
+        var res = expr.accept(new Visitor());
+
+        var resJava = Lib.muplListToJavaList(res);
+
+        assertEquals(resJava.size(), 3);
+        if (resJava.get(0) instanceof Int i) {
+            assertEquals(i.value, 10);
+        }
+        if (resJava.get(1) instanceof Int i) {
+            assertEquals(i.value, 11);
+        }
+        if (resJava.get(2) instanceof Int i) {
+            assertEquals(i.value, 16);
+        }
+
     }
 
 

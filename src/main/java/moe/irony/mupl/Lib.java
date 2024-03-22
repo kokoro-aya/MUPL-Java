@@ -53,11 +53,11 @@ public class Lib {
     }
 
     public static Expr muplMap() {
-        return new Fun("mupl-map", "m-fun",
-                new Fun("map-helper", "m-list",
-                        Lib.ifAUnit(new Var("m-list"), new AUnit(),
-                                new APair(new Call(new Var("m-fun"), new Fst(new Var("m-list"))),
-                                        new Call(new Var("map-helper"), new Snd(new Var("m-list")))))));
+        return new Fun("mupl-map", "fn",
+                new Fun("mupl-map-helper", "xs",
+                        Lib.ifAUnit(new Var("xs"), new AUnit(),
+                                new APair(new Call(new Var("fn"), new Fst(new Var("xs"))),
+                                        new Call(new Var("mupl-map-helper"), new Snd(new Var("xs")))))));
     }
 
     public static Expr muplMapAddN() {
