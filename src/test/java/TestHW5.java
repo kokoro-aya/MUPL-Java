@@ -1,8 +1,12 @@
+import moe.irony.mupl.Lib;
+import moe.irony.mupl.Pair;
 import moe.irony.mupl.Visitor;
 import moe.irony.mupl.data.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,22 +69,52 @@ public class TestHW5 {
 
     @Test
     public void testIfAUnit() {
-        fail();
+        var expr = Lib.ifAUnit(new Int(1), new Int(2), new Int(3));
+        var visitor = new Visitor();
+        if (expr.accept(visitor) instanceof Int res) {
+            assertEquals(res.value, 3);
+        } else {
+            fail();
+        }
     }
 
     @Test
     public void testMLetStar() {
-        fail();
+        var expr = Lib.MLetStar(
+                List.of(new Pair<String, Expr>("x", new Int(10))),
+                new Var("x"));
+        var visitor = new Visitor();
+        if (expr.accept(visitor) instanceof Int res) {
+            assertEquals(res.value, 10);
+        } else {
+            fail();
+        }
     }
 
     @Test
     public void testIfEq() {
-        fail();
+        var expr = Lib.IfEq(new Int(1), new Int(2), new Int(3), new Int(4));
+        var visitor = new Visitor();
+        if (expr.accept(visitor) instanceof Int res) {
+            assertEquals(res.value, 4);
+        } else {
+            fail();
+        }
     }
 
     @Test
     public void testMuplMap() {
-        fail();
+        var expr = new Call(new Call(Lib.muplMap(),
+                new Fun("#f", "x", new Add(new Var("x"), new Int(7)))),
+                new APair(new Int(1), new AUnit())
+                );
+        var visitor = new Visitor();
+        if (expr.accept(visitor) instanceof APair res) {
+            assertTrue(res.e1 instanceof Int i && i.value == 8);
+            assertInstanceOf(AUnit.class, res.e2);
+        } else {
+            fail();
+        }
     }
 
     @Test

@@ -47,13 +47,15 @@ public class Visitor {
     }
 
     public Expr visitIfGreater(IfGreater i) {
-        var v1 = i.e1;
-        var v2 = i.e2;
+        var v1 = i.e1.accept(this);
+        var v2 = i.e2.accept(this);
+        // The e3 and e4 will only be evaluated accordingly to the result of
+        // v1 and v2 (hence evaluations of e1 and e2)
         if (v1 instanceof Int iv1 && v2 instanceof Int iv2) {
             if (iv1.value > iv2.value) {
-                return i.e3;
+                return i.e3.accept(this);
             } else {
-                return i.e4;
+                return i.e4.accept(this);
             }
         } else {
             throw new IllegalStateException("MUPL ifgreater operation applied to non-number");

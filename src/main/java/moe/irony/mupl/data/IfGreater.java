@@ -17,11 +17,11 @@ public class IfGreater implements Expr {
 
     @Override
     public Expr accept(Visitor v) {
-        var v1 = e1.accept(v);
-        var v2 = e2.accept(v);
-        var v3 = e3.accept(v);
-        var v4 = e4.accept(v);
-        return v.visitIfGreater(new IfGreater(v1, v2, v3, v4));
+        // This is where the evaluation is delicate
+        // In fact, common visitor implementation put `accept` for components
+        // in the `accept` function of parent, which means the expression is
+        // evaluated instantly hence we lost the delayed semantic
+        return v.visitIfGreater(this);
     }
 }
 
